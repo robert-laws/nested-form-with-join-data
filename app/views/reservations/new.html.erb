@@ -14,7 +14,7 @@
 
   <%= f.collection_check_boxes :activity_ids, @activities, :id, :name do |activity| %>
     <div>
-      <%= activity.check_box %> <%= activity.object.name %> <input type='text' name='reservation[activity_ids][][durations][]'>
+      <%= activity.check_box %> <%= activity.object.name %> <input type='text' name='reservation[durations][<%= activity.object.id %>]'>
     </div>
   <% end %>
 

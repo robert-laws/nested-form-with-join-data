@@ -10,6 +10,7 @@ class ReservationsController < ApplicationController
 
   def new
     @reservation = Reservation.new
+    @reservation_activities = @reservation.reservation_activities
     @activities = Activity.all
   end
 
@@ -27,10 +28,19 @@ class ReservationsController < ApplicationController
     @activities = Activity.all
   end
 
+  def update
+    @reservation = Reservation.find(params[:id])
+    if @reservation.update(reservation_params)
+      redirect_to reservation_path(@reservation)
+    else
+      render :new
+    end
+  end
+
   private
 
   def reservation_params
     # params.require(:reservation).permit(:date, :drop_off_time, :pick_up_time, reservation_activities_attributes: [:duration, :activity_id])
-    params.require(:reservation).permit(:date, :drop_off_time, :pick_up_time, activity_ids: [])
+    params.require(:reservation).permit(:date, :drop_off_time, :pick_up_time, activity_ids: [], durations: {})
   end
 end

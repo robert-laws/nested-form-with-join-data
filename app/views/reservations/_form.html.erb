@@ -9,13 +9,13 @@
   <%= f.time_field :pick_up_time %><br>
 
   <%= f.label 'Activities Available' %><br>
-  <%= f.fields_for :reservation_activities, @reservation.reservation_activities.build do |ra_fields| %>
+  <%= f.fields_for :reservation_activities, @reservation_activities do |ra_fields| %>
     <%= ra_fields.label :duration %>
     <%= ra_fields.number_field :duration, in: 15..120, step: 15 %><br>
 
     <%= ra_fields.label 'Activity' %>
-    <%= ra_fields.collection_select :activity_id, @activities, :id, :name %><br>
-
+    <%= raise 'info'.inspect %>
+    <%= ra_fields.text_field :activity_id %><br>
   <% end %>
 
   <%= f.submit 'Make Reservation' %>

@@ -13,3 +13,8 @@
 //= require rails-ujs
 //= require turbolinks
 //= require_tree .
+
+document.addEventListener('DOMContentLoaded', function(){ 
+  cbs = document.querySelectorAll('.activities_check_boxes')
+  // alert(cbs.length)
+}, false);
