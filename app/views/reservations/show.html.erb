@@ -10,10 +10,6 @@
 
 <p>Selected activities for reservation</p>
 
-<ul>
-  <% @reservation.reservation_activities.each do |reservation_activity| %>
-    <li>
-      <%= reservation_activity.activity.name %>, duration: <%= reservation_activity.duration %>
-    </li>
-  <% end %>
-</ul>
+<% @reservation.activities.each do |activity| %>
+  <%= render partial: 'activities/details', locals: { activity: activity } %>
+<% end %>
