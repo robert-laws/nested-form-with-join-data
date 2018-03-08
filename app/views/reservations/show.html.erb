@@ -1,0 +1,19 @@
+<h1>Reservation Details</h1>
+
+<h4>
+  <%= format_date(@reservation) %>
+</h4>
+
+<p>Total Activity Time:
+  <%= @total_time %>
+</p>
+
+<p>Selected activities for reservation</p>
+
+<ul>
+  <% @reservation.reservation_activities.each do |reservation_activity| %>
+    <li>
+      <%= reservation_activity.activity.name %>, duration: <%= reservation_activity.duration %>
+    </li>
+  <% end %>
+</ul>

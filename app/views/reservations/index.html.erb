@@ -1,0 +1,9 @@
+<h1>All Reservations</h1>
+
+<ul>
+  <% @reservations.each do |reservation| %>
+    <li>
+      <%= link_to format_date(reservation), reservation_path(reservation) %>
+    </li>
+  <% end %>
+</ul>
