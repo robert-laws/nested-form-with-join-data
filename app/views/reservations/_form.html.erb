@@ -1,0 +1,22 @@
+<%= form_for @reservation do |f| %>
+  <%= f.label :date %>
+  <%= f.date_field :date %><br>
+
+  <%= f.label :drop_off_time %>
+  <%= f.time_field :drop_off_time %><br>
+
+  <%= f.label :pick_up_time %>
+  <%= f.time_field :pick_up_time %><br>
+
+  <%= f.label 'Activities Available' %><br>
+  <%= f.fields_for :reservation_activities, @reservation.reservation_activities.build do |ra_fields| %>
+    <%= ra_fields.label :duration %>
+    <%= ra_fields.number_field :duration, in: 15..120, step: 15 %><br>
+
+    <%= ra_fields.label 'Activity' %>
+    <%= ra_fields.collection_select :activity_id, @activities, :id, :name %><br>
+
+  <% end %>
+
+  <%= f.submit 'Make Reservation' %>
+<% end %>

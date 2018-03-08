@@ -1,2 +1,22 @@
-<h1>Reservations#new</h1>
-<p>Find me in app/views/reservations/new.html.erb</p>
+<h1>New Reservation Form</h1>
+
+<%#= render 'form' %>
+
+<%= form_for @reservation do |f| %>
+  <%= f.label :date %>
+  <%= f.date_field :date %><br>
+
+  <%= f.label :drop_off_time %>
+  <%= f.time_field :drop_off_time %><br>
+
+  <%= f.label :pick_up_time %>
+  <%= f.time_field :pick_up_time %><br>
+
+  <%= f.collection_check_boxes :activity_ids, @activities, :id, :name do |activity| %>
+    <div>
+      <%= activity.check_box %> <%= activity.object.name %> <input type='text' name='reservation[activity_ids][][durations][]'>
+    </div>
+  <% end %>
+
+  <%= f.submit 'Make Reservation' %>
+<% end %>
