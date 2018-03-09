@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180308074300) do
+ActiveRecord::Schema.define(version: 20180309064253) do
 
   create_table "activities", force: :cascade do |t|
     t.string "name"
@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 20180308074300) do
     t.string "best_for_size"
     t.string "best_for_type"
     t.string "energy_usage"
+    t.boolean "custom", default: false
   end
 
   create_table "reservation_activities", force: :cascade do |t|

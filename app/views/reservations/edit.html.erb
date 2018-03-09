@@ -13,8 +13,8 @@
   <%= f.time_field :pick_up_time %><br>
 
   <%= f.collection_check_boxes :activity_ids, @activities, :id, :name do |activity| %>
-    <div class='activities_check_boxes'>
-      <%= activity.check_box %> <%= activity.object.name %> <input type='text' name='reservation[durations][<%= activity.object.id %>]' value='<%= find_duration @reservation.id, activity.object.id %>'>
+    <div>
+      <%= activity.check_box %> <%= activity.object.name %> <input type='text' name='reservation[durations][<%= activity.object.id %>]' value='<%= find_duration(@reservation.id, activity.object.id) if @reservation.id %>'>
     </div>
   <% end %>
 

@@ -10,6 +10,8 @@
 
   <%= f.label 'Activities Available' %><br>
   <%= f.fields_for :reservation_activities, @reservation_activities do |ra_fields| %>
+    <%= ra_fields.hidden_field :custom, value: true %>
+
     <%= ra_fields.label :duration %>
     <%= ra_fields.number_field :duration, in: 15..120, step: 15 %><br>
 

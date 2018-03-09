@@ -13,3 +13,7 @@
 <% @reservation.activities.each do |activity| %>
   <%= render partial: 'activities/details', locals: { activity: activity } %>
 <% end %>
+
+<hr>
+
+<%= link_to 'Edit Reservation', edit_reservation_path(@reservation) %>

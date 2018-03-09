@@ -10,7 +10,7 @@ class ReservationsController < ApplicationController
 
   def new
     @reservation = Reservation.new
-    @reservation_activities = @reservation.reservation_activities
+    @reservation_activities = @reservation.reservation_activities.build
     @activities = Activity.all
   end
 
@@ -41,6 +41,6 @@ class ReservationsController < ApplicationController
 
   def reservation_params
     # params.require(:reservation).permit(:date, :drop_off_time, :pick_up_time, reservation_activities_attributes: [:duration, :activity_id])
-    params.require(:reservation).permit(:date, :drop_off_time, :pick_up_time, activity_ids: [], durations: {})
+    params.require(:reservation).permit(:date, :drop_off_time, :pick_up_time, activity_ids: [], durations: {}, reservation_activities_attributes: [:duration, activities: [:name, :description, :custom]])
   end
 end
