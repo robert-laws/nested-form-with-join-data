@@ -1,22 +1,3 @@
 <h1>Edit an existing reservation</h1>
 
-<%#= render 'form' %>
-
-<%= form_for @reservation do |f| %>
-  <%= f.label :date %>
-  <%= f.date_field :date %><br>
-
-  <%= f.label :drop_off_time %>
-  <%= f.time_field :drop_off_time %><br>
-
-  <%= f.label :pick_up_time %>
-  <%= f.time_field :pick_up_time %><br>
-
-  <%= f.collection_check_boxes :activity_ids, @activities, :id, :name do |activity| %>
-    <div>
-      <%= activity.check_box %> <%= activity.object.name %> <input type='text' name='reservation[durations][<%= activity.object.id %>]' value='<%= find_duration(@reservation.id, activity.object.id) if @reservation.id %>'>
-    </div>
-  <% end %>
-
-  <%= f.submit 'Make Reservation' %>
-<% end %>
+<%= render 'form' %>

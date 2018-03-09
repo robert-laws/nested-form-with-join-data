@@ -8,16 +8,28 @@
   <%= f.label :pick_up_time %>
   <%= f.time_field :pick_up_time %><br>
 
-  <%= f.label 'Activities Available' %><br>
-  <%= f.fields_for :reservation_activities, @reservation_activities do |ra_fields| %>
-    <%= ra_fields.hidden_field :custom, value: true %>
+  <%= f.collection_check_boxes :activity_ids, @activities, :id, :name do |activity| %>
+    <div>
+      <%= activity.check_box %> <%= activity.object.name %> <input type='text' name='reservation[durations][<%= activity.object.id %>]' value='<%= find_duration(@reservation.id, activity.object.id) if @reservation.id %>'>
+    </div>
+  <% end %>
 
-    <%= ra_fields.label :duration %>
-    <%= ra_fields.number_field :duration, in: 15..120, step: 15 %><br>
+  <% if params[:id].nil? %>
+    <%= f.label 'Or request a custom activity' %><br>
+    <%= f.fields_for :reservation_activities, @reservation_activities do |ra_fields| %>
+      <%= ra_fields.label :duration %>
+      <%= ra_fields.number_field :duration, in: 15..120, step: 15 %><br>
 
-    <%= ra_fields.label 'Activity' %>
-    <%= raise 'info'.inspect %>
-    <%= ra_fields.text_field :activity_id %><br>
+      <%= ra_fields.fields_for :activities, @reservation.activities.build do |activity_fields| %>
+        <%= activity_fields.hidden_field :custom, value: true %>
+
+        <%= activity_fields.label :name %>
+        <%= activity_fields.text_field :name %><br>
+
+        <%= activity_fields.label :description %>
+        <%= activity_fields.text_area :description %><br>
+      <% end %>
+    <% end %>
   <% end %>
 
   <%= f.submit 'Make Reservation' %>

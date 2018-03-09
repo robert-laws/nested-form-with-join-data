@@ -11,7 +11,7 @@ class ReservationsController < ApplicationController
   def new
     @reservation = Reservation.new
     @reservation_activities = @reservation.reservation_activities.build
-    @activities = Activity.all
+    @activities = Activity.all.where(custom: false)
   end
 
   def create
