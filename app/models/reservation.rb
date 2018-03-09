@@ -8,9 +8,11 @@ class Reservation < ApplicationRecord
   def reservation_activities_attributes=(reservation_activity_attributes)
     reservation_activity_attributes.values.each do |reservation_activity_attribute|
       activity_attributes = reservation_activity_attribute["activities"]
-      activity = Activity.find_or_create_by(name: activity_attributes["name"], description: activity_attributes["description"], custom: activity_attributes["custom"])
-      reservation_activity = ReservationActivity.new(duration: reservation_activity_attribute["duration"], activity: activity)
-      self.reservation_activities << reservation_activity
+      if activity_attributes["name"].present?
+        activity = Activity.find_or_create_by(name: activity_attributes["name"], description: activity_attributes["description"], custom: activity_attributes["custom"])
+        reservation_activity = ReservationActivity.new(duration: reservation_activity_attribute["duration"], activity: activity)
+        self.reservation_activities << reservation_activity
+      end
     end
   end
 
